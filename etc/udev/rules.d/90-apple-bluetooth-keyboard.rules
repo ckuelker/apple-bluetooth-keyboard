@@ -1,0 +1,60 @@
+# /opt/apple-bluetooth-keyboard/etc/udev/rules.d/90-apple-bluetooth-keyboard.rules
+# 0.1.0 2024-06-07: Initial release
+#
+# TESTING
+#   udevadm control --log-priority=debug
+#   journalctl -u systemd-udevd --since "1 hour ago"
+#   tail -f /var/log/syslog
+#   udevadm monitor
+#   udevadm trigger --attr-match=subsystem=hid --action=bind
+#
+# INFO
+# --- [ udeadm monitor ] ------------------------------------------------------
+# UDEV  [3049.229433] bind     /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/bluetooth/hci0/hci0:256/0005:05AC:0255.000C (hid)
+# ACTION=bind
+# DEVPATH=/devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/bluetooth/hci0/hci0:256/0005:05AC:0255.000C
+# SUBSYSTEM=hid
+# DRIVER=apple
+# HID_ID=0005:000005AC:00000255
+# HID_NAME=Apple Wireless Keyboard
+# HID_PHYS=40:a3:cc:28:90:be
+# HID_UNIQ=6c:70:9f:cc:f5:21
+# MODALIAS=hid:b0005g0000v000005ACp00000255
+# SEQNUM=4878
+# USEC_INITIALIZED=3049229346
+#
+# --- [ udeadm info -a PATH ] -------------------------------------------------
+# PATH='/sys/devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/bluetooth/hci0/hci0:256/0005:05AC:0255.000C'
+#  looking at device '/devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/bluetooth/hci0/hci0:256/0005:05AC:0255.000C':
+#    KERNEL=="0005:05AC:0255.000C"
+#    SUBSYSTEM=="hid"
+#    DRIVER=="apple"
+#    ATTR{country}=="21"
+#    ATTR{power/async}=="enabled"
+#    ATTR{power/control}=="auto"
+#    ATTR{power/runtime_active_kids}=="0"
+#    ATTR{power/runtime_active_time}=="0"
+#    ATTR{power/runtime_enabled}=="disabled"
+#    ATTR{power/runtime_status}=="unsupported"
+#    ATTR{power/runtime_suspended_time}=="0"
+#    ATTR{power/runtime_usage}=="0"
+# ...
+# --- [ udeadm info PATH ] ----------------------------------------------------
+# PATH='/sys/devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/bluetooth/hci0/hci0:256/0005:05AC:0255.000C'
+# P: /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/bluetooth/hci0/hci0:256/0005:05AC:0255.000C
+# M: 0005:05AC:0255.000C
+# U: hid
+# V: apple
+# E: DEVPATH=/devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/bluetooth/hci0/hci0:256/0005:05AC:0255.000C
+# E: SUBSYSTEM=hid
+# E: DRIVER=apple
+# E: HID_ID=0005:000005AC:00000255
+# E: HID_NAME=Apple Wireless Keyboard
+# E: HID_PHYS=40:a3:cc:28:90:be
+# E: HID_UNIQ=6c:70:9f:cc:f5:21
+# E: MODALIAS=hid:b0005g0000v000005ACp00000255
+#
+# E = ENV
+
+ACTION=="bind", SUBSYSTEM=="hid", DRIVER=="apple", ENV{HID_NAME}=="Apple Wireless Keyboard", RUN+="/opt/apple-bluetooth-keyboard/bin/fnmode-disable"
+
