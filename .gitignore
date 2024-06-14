@@ -1,0 +1,24 @@
+# +---------------------------------------------------------------------------+
+# | .gitignore                                                                |
+# |                                                                           |
+# | Basic .gitignore file                                                     |
+# |                                                                           |
+# | Version: 0.1.0 2024-06-14                                                 |
+# |                                                                           |
+# | Changes:                                                                  |
+# |                                                                           |
+# | 0.1.0 2024-06-14 Christian Külker <c@c8i.org>                             |
+# |     - Initial release (vim specific)                                      |
+# |                                                                           |
+# +---------------------------------------------------------------------------+
+*.swp
+*~
+hardcopy.1
+hardcopy.2
+hardcopy.3
+hardcopy.4
+hardcopy.5
+hardcopy.6
+hardcopy.7
+hardcopy.8
+hardcopy.9
