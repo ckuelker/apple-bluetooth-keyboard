@@ -1,0 +1,14 @@
+#!/bin/bash
+# 0: Disable number pad as overlay on normal key pad (numlock off)
+# 1: Enable number pad as overlay on normal key pad (numlock on)
+# See: https://wiki.archlinux.org/title/Apple_Keyboard
+#
+# 0.1.0 2024-06-27: Initial release
+
+# Following 5 lines for debug
+#ns="fnmode-disable"
+#dir="/var/log"
+#fn="${dir}/${ns}.log"
+#touch $fn
+#/usr/bin/date +'%FT%T' >> $fn
+echo 0 > /sys/module/hid_apple/parameters/fnmode
